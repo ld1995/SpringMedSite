@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="SpringJPA_main" target="1.8" />
       <module name="SpringJPA_test" target="1.8" />
+      <module name="SpringMedSite_main" target="1.8" />
+      <module name="SpringMedSite_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

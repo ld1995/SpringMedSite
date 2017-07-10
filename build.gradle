@@ -26,6 +26,8 @@ dependencies {
 	testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('net.sourceforge.nekohtml:nekohtml:1.9.21')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
