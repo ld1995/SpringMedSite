@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SpringJPA.iml" filepath="$PROJECT_DIR$/.idea/modules/SpringJPA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SpringJPA_main.iml" filepath="$PROJECT_DIR$/.idea/modules/SpringJPA_main.iml" group="SpringJPA" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SpringJPA_test.iml" filepath="$PROJECT_DIR$/.idea/modules/SpringJPA_test.iml" group="SpringJPA" />
+    </modules>
+  </component>
+</project>
