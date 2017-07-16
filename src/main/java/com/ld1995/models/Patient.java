@@ -1,4 +1,4 @@
-package com.ld1995.modul;
+package com.ld1995.models;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,32 +11,26 @@ public class Patient {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "wards")
-    private String wards;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "wards_id")
+    private Wards wards;
+
     @Column(name = "number")
     private Integer number;
+
     @Column(name = "date", columnDefinition="DATETIME")
     @Temporal(TemporalType.DATE)
     private Date date;
+
     @Column(name = "last")
     private String last;
+
     @Column(name = "first")
     private String first;
+
     @Column(name = "second")
     private String second;
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", wards='" + wards + '\'' +
-                ", number=" + number +
-                ", date=" + date +
-                ", last='" + last + '\'' +
-                ", first='" + first + '\'' +
-                ", second='" + second + '\'' +
-                '}';
-    }
 
     public Integer getId() {
         return id;
@@ -44,14 +38,6 @@ public class Patient {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getWards() {
-        return wards;
-    }
-
-    public void setWards(String wards) {
-        this.wards = wards;
     }
 
     public Integer getNumber() {
@@ -94,4 +80,11 @@ public class Patient {
         this.second = second;
     }
 
+    public void setWards(Wards wards) {
+        this.wards = wards;
+    }
+
+    public Wards getWards() {
+        return wards;
+    }
 }

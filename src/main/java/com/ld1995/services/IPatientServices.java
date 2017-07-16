@@ -1,10 +1,10 @@
-package com.ld1995.serves;
+package com.ld1995.services;
 
-import com.ld1995.modul.Patient;
+import com.ld1995.models.Patient;
 
 import java.util.List;
 
-public interface IPatientServes {
+public interface IPatientServices {
 
     public List<Patient> getPatientsList();
 

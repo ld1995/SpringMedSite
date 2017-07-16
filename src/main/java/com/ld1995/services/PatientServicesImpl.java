@@ -1,6 +1,6 @@
-package com.ld1995.serves;
+package com.ld1995.services;
 
-import com.ld1995.modul.Patient;
+import com.ld1995.models.Patient;
 import com.ld1995.repository.IPatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("patientService")
-public class PatientServesImpl implements IPatientServes {
+public class PatientServicesImpl implements IPatientServices {
 
     @Autowired
     private IPatientRepository patientRepository;
-
 
     @Override
     public List<Patient> getPatientsList() {

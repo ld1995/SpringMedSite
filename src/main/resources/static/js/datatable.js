@@ -4,7 +4,7 @@ $(document).ready( function () {
         "sAjaxDataProp": "",
         "order": [[ 0, "asc" ]],
         "aoColumns": [
-            { "mData": "id"},
+            //{ "mData": "id"},
             { "mData": "wards" },
             { "mData": "number" },
             { "mData": "date" },
