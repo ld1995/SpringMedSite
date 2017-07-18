@@ -2,13 +2,26 @@ package com.ld1995.models;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
+
+    public User(String lastName, String firstName, String username, String password, Wards wards, List<Role> authorities) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.username = username;
+        this.password = password;
+        this.wards = wards;
+        this.authorities = authorities;
+    }
+
+    public User() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,23 +36,22 @@ public class User {
     @NotEmpty(message = "*Please provide your first name")
     private String firstName;
 
-    @Column(name = "nick")
-    @NotEmpty(message = "*Please provide your nickname")
-    private String nickname;
+    @Column(name = "username", unique = true)
+    @NotEmpty(message = "*Please provide your username")
+    private String username;
 
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
-    @Transient
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wards_id")
     private Wards wards;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private List<Role> authorities;
 
     public int getId() {
         return id;
@@ -65,12 +77,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Wards getWards() {
@@ -81,11 +93,39 @@ public class User {
         this.wards = wards;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public List<Role> getAuthorities() {
+        return authorities;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setAuthorities(List<Role> roles) {
+        this.authorities = authorities;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -20,6 +20,7 @@ public class PatientRestController {
     public List<Patient> getAllEmployees(){
         return patientServes.getPatientsList();
     }
+
     @RequestMapping(value = "/patients/{id}", method = RequestMethod.GET)
     public Patient getEmployeeById(@PathVariable("id") long id){
         return patientServes.getPatientById(id);

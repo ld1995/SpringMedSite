@@ -1,10 +1,19 @@
 package com.ld1995.models;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements GrantedAuthority {
+
+    public Role() {
+    }
+
+    public Role(String role) {
+        this.authority = authority;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,12 +21,21 @@ public class Role {
     private int id;
 
     @Column(name="role")
-    private String role;
+    private String authority;
 
-    public Role() {
+    public int getId() {
+        return id;
     }
 
-    public Role(String role) {
-        this.role = role;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setRole(String authority) {
+        this.authority = authority;
     }
 }

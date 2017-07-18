@@ -1,9 +1,7 @@
 <component name="libraryTable">
   <library name="java">
     <CLASSES />
-    <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/lib/slf4j-1.8.0-alpha2.zip!/slf4j-1.8.0-alpha2/site/apidocs" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

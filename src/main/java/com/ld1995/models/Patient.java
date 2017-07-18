@@ -7,6 +7,18 @@ import java.util.Date;
 @Table(name = "patient")
 public class Patient {
 
+    public Patient() {
+    }
+
+    public Patient(Wards wards, Integer number, Date date, String last, String first, String second) {
+        this.wards = wards;
+        this.number = number;
+        this.date = date;
+        this.last = last;
+        this.first = first;
+        this.second = second;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
