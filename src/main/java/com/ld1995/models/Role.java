@@ -3,6 +3,7 @@ package com.ld1995.models;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -35,7 +36,7 @@ public class Role implements GrantedAuthority {
         return authority;
     }
 
-    public void setRole(String authority) {
+    public void setAuthority(String authority) {
         this.authority = authority;
     }
 }

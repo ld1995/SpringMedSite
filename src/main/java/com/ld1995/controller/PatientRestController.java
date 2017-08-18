@@ -2,6 +2,7 @@ package com.ld1995.controller;
 
 import com.ld1995.models.Patient;
 import com.ld1995.services.IPatientServices;
+import com.ld1995.services.PatientServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,10 @@ import java.util.List;
 public class PatientRestController {
 
     @Autowired
-    private IPatientServices patientServes;
+    private PatientServicesImpl patientServes;
 
     @RequestMapping(path="/patients", method= RequestMethod.GET)
-    public List<Patient> getAllEmployees(){
+    public Iterable<Patient> getAllEmployees(){
         return patientServes.getPatientsList();
     }
 

@@ -11,6 +11,16 @@ import java.util.List;
 @Table(name = "user")
 public class User implements UserDetails {
 
+    public User(String lastName, String firstName, String username, String password, String passwordConfirm , Wards wards, List<Role> authorities) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.username = username;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+        this.wards = wards;
+        this.authorities = authorities;
+    }
+
     public User(String lastName, String firstName, String username, String password, Wards wards, List<Role> authorities) {
         this.lastName = lastName;
         this.firstName = firstName;
@@ -44,6 +54,9 @@ public class User implements UserDetails {
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
     private String password;
+
+    @Transient
+    private String passwordConfirm;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wards_id")
@@ -107,6 +120,14 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     @Override

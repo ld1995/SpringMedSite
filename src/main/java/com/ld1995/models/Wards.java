@@ -43,7 +43,12 @@ public class Wards {
         this.name = name;
     }
 
-//    public Patient getPatient() {
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    //    public Patient getPatient() {
 //        return patient;
 //    }
 //

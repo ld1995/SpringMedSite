@@ -9,4 +9,8 @@ public interface IPatientServices {
     public List<Patient> getPatientsList();
 
     public Patient getPatientById(long id);
+
+    public void deletePatient(Patient patient);
+
+    public Patient save(Patient patient);
 }

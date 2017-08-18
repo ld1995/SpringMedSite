@@ -6,9 +6,12 @@ import com.ld1995.repository.IUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -28,13 +31,15 @@ public class UserServiceImpl implements IUserServices, UserDetailsService {
 
     @Override
     public void saveUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
 
     @Override
-    public UserDetails loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
-        return userRepository.findAll().stream().filter(user -> user.getUsername().equals(username)).findAny()
-                .orElseThrow( () -> new UsernameNotFoundException("user" + username + " waw not found!"));
+    public User loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username);
+        //return userRepository.findAll().stream().filter(user -> user.getUsername().equals(username)).findAny()
+          //      .orElseThrow( () -> new UsernameNotFoundException("user" + username + " waw not found!"));
     }
 
 //    @PostConstruct

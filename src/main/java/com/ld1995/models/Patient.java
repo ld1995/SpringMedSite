@@ -1,5 +1,7 @@
 package com.ld1995.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,6 +21,15 @@ public class Patient {
         this.second = second;
     }
 
+    public Patient(String wardsName, Integer number, Date date, String last, String first, String second) {
+        this.number = number;
+        this.date = date;
+        this.last = last;
+        this.first = first;
+        this.second = second;
+        this.wardsName = wardsName;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
@@ -32,6 +43,7 @@ public class Patient {
     private Integer number;
 
     @Column(name = "date", columnDefinition="DATETIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date date;
 
@@ -43,6 +55,9 @@ public class Patient {
 
     @Column(name = "second")
     private String second;
+
+    @Transient
+    private String wardsName;
 
     public Integer getId() {
         return id;
