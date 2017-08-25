@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.joining;
 public class PatientController {
 
     @Autowired
-    PatientServicesImpl patientServices;
+    private PatientServicesImpl patientServices;
 
     @RequestMapping(path="/", method= RequestMethod.GET)
     public String goHome(){
@@ -36,7 +36,7 @@ public class PatientController {
     }
 
     @RequestMapping(path = "/new", method = RequestMethod.POST)
-    public String addPatient(@ModelAttribute("patientForm") Patient patient, BindingResult bindingResult, Model model) {
+    public String addPatient(@ModelAttribute("patientForm") Patient patient, Model model) {
         patientServices.save(patient);
         return "index";
     }

@@ -1,5 +1,6 @@
 package com.ld1995.controller;
 
+import com.ld1995.dto.PatientDTO;
 import com.ld1995.models.Patient;
 import com.ld1995.services.IPatientServices;
 import com.ld1995.services.PatientServicesImpl;
@@ -18,8 +19,8 @@ public class PatientRestController {
     private PatientServicesImpl patientServes;
 
     @RequestMapping(path="/patients", method= RequestMethod.GET)
-    public Iterable<Patient> getAllEmployees(){
-        return patientServes.getPatientsList();
+    public Iterable<PatientDTO> getAllEmployees(){
+        return patientServes.getPatientsDTOList();
     }
 
     @RequestMapping(value = "/patients/{id}", method = RequestMethod.GET)

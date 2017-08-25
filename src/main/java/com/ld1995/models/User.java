@@ -11,22 +11,22 @@ import java.util.List;
 @Table(name = "user")
 public class User implements UserDetails {
 
-    public User(String lastName, String firstName, String username, String password, String passwordConfirm , Wards wards, List<Role> authorities) {
+    public User(String lastName, String firstName, String username, String password, String passwordConfirm , Department department, List<Role> authorities) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.username = username;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
-        this.wards = wards;
+        this.department = department;
         this.authorities = authorities;
     }
 
-    public User(String lastName, String firstName, String username, String password, Wards wards, List<Role> authorities) {
+    public User(String lastName, String firstName, String username, String password, Department department, List<Role> authorities) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.username = username;
         this.password = password;
-        this.wards = wards;
+        this.department = department;
         this.authorities = authorities;
     }
 
@@ -58,9 +58,9 @@ public class User implements UserDetails {
     @Transient
     private String passwordConfirm;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "wards_id")
-    private Wards wards;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -98,12 +98,12 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public Wards getWards() {
-        return wards;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setWards(Wards wards) {
-        this.wards = wards;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public List<Role> getAuthorities() {

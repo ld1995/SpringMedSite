@@ -5,7 +5,7 @@ $(document).ready( function () {
         "order": [[ 0, "asc" ]],
         "aoColumns": [
             //{ "mData": "id"},
-            { "mData": "wards" },
+            { "mData": "departmentName" },
             { "mData": "number" },
             { "mData": "date" },
             { "mData": "last" },

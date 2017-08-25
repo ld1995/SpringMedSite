@@ -1,7 +1,10 @@
 package com.ld1995.controller;
 
+import com.ld1995.models.Department;
 import com.ld1995.models.Role;
 import com.ld1995.models.User;
+import com.ld1995.repository.IDepartmentRepository;
+import com.ld1995.services.DepartmentServicesImpl;
 import com.ld1995.services.SecurityServicesImpl;
 import com.ld1995.services.UserServiceImpl;
 import com.ld1995.validator.UserValidator;
@@ -11,10 +14,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
@@ -22,32 +25,42 @@ import static java.util.stream.Collectors.joining;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @Autowired
-    UserValidator userValidator;
+    private UserValidator userValidator;
 
     @Autowired
-    SecurityServicesImpl securityServices;
+    private SecurityServicesImpl securityServices;
+
+    @Autowired
+    private DepartmentServicesImpl departmentServices;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
+        //model.addAttribute("getDepartments", departmentServices.getDepartmentList());
         return "registration";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
+    @ModelAttribute("getDepartmentList")
+    public List<Department> departments() {
+        return departmentServices.getDepartmentList();
+    }
 
-        if (bindingResult.hasErrors()) {
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingUserForm,
+                               @ModelAttribute("getDepartmentList") Department department, BindingResult bindingGetDepartment,
+                               Model model) {
+        //получить департамент? с формы передается лишь 1 option
+        userForm.setDepartment(department);
+        userValidator.validate(userForm, bindingUserForm);
+
+        if (bindingUserForm.hasErrors())
             return "registration";
-        }
 
         userService.saveUser(userForm);
-
         securityServices.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/";
     }
 

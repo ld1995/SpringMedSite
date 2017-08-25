@@ -23,8 +23,8 @@ import java.util.Optional;
 @Service("userService")
 public class UserServiceImpl implements IUserServices, UserDetailsService {
 
-    @Autowired
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+//    @Autowired
+//    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private IUserRepository userRepository;

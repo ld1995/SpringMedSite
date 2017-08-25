@@ -12,22 +12,13 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Wards wards, Integer number, Date date, String last, String first, String second) {
-        this.wards = wards;
+    public Patient(Department department, Integer number, Date date, String last, String first, String second) {
+        this.department = department;
         this.number = number;
         this.date = date;
         this.last = last;
         this.first = first;
         this.second = second;
-    }
-
-    public Patient(String wardsName, Integer number, Date date, String last, String first, String second) {
-        this.number = number;
-        this.date = date;
-        this.last = last;
-        this.first = first;
-        this.second = second;
-        this.wardsName = wardsName;
     }
 
     @Id
@@ -35,9 +26,9 @@ public class Patient {
     @Column(name = "id")
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "wards_id")
-    private Wards wards;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="department_id")
+    private Department department;
 
     @Column(name = "number")
     private Integer number;
@@ -55,9 +46,6 @@ public class Patient {
 
     @Column(name = "second")
     private String second;
-
-    @Transient
-    private String wardsName;
 
     public Integer getId() {
         return id;
@@ -107,11 +95,11 @@ public class Patient {
         this.second = second;
     }
 
-    public void setWards(Wards wards) {
-        this.wards = wards;
+    public Department getDepartment() {
+        return department;
     }
 
-    public Wards getWards() {
-        return wards;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
